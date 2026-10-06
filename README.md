@@ -49,7 +49,8 @@ Skill names follow `devdoc-<verb>`: a skill is a *verb the user performs* (revie
 
 | Tool | Mechanism | Status |
 |---|---|---|
-| Claude Code | `SKILL.md` + `references/*.md`, loaded on demand | native — built here |
+| Claude Code | `SKILL.md` + `references/*.md`, loaded on demand; symlink into `~/.claude/skills/<name>/` | native — built here |
+| ZCode | Same skill format; discovered from `<project>/.zcode/skills/`, `<project>/.agents/skills/`, `~/.zcode/skills/`, or `~/.agents/skills/` (it does not scan `~/.claude/skills/`) | native — symlink into `~/.agents/skills/<name>/`, see root README |
 | Codex CLI | Agent Skills: `.agents/skills/<name>/SKILL.md` + `references/`, same format as Claude Code | drop-in — see `adapters/codex-notes.md` |
 | Trae IDE | `.trae/rules/` — a single self-contained Markdown file, no confirmed import mechanism | needs manual inlining or a small build step — see `adapters/trae-notes.md` |
 | Any other tool | — | add a new note under `adapters/`; never duplicate rule content by hand, edit `references/` and re-run the sync script |
