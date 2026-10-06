@@ -60,6 +60,29 @@ Skill names follow `devdoc-<verb>`: a skill is a *verb the user performs* (revie
 - **`/devdoc-fix`** — runs the same checks, then proposes a diff. Applies changes only after the user confirms.
 - **`/devdoc-draft`** — generates a new document in this style from scratch, for a user's target project. Gathers facts from the user's description and the target repo (anything unverifiable becomes an explicit `TODO:` placeholder — it never invents facts), proposes an outline for confirmation, drafts while applying the rules natively, self-checks the result against the same rules, and writes the file only after the user confirms the target path.
 
+## Deferred (known gaps — deliberately not curated yet)
+
+Rule areas that exist in the source material but aren't in the references. Promotion = copy into the right reference file, one small commit — this list exists so "not included" means "considered and deferred", not "unknown".
+
+| Area | Source | One-line rule |
+|---|---|---|
+| Dates and times | developers.google.com/style/dates-times | 12-hour clock with AM/PM; spell out dates; YYYY-MM-DD if numeric; no seasons |
+| Ellipses | /style/ellipses | Avoid outside quotations; never in UI labels |
+| Slashes | /style/slashes | Avoid except in code; no "and/or", no slash dates |
+| Possessives | /style/possessives | Avoid possessives of product/code names — rewrite |
+| Quotation marks | /style/quotation-marks | Straight double quotes; periods inside unless literal strings; singles only in code/nesting |
+| Pluralization | /style/pluralization | No 's on abbreviations (APIs); units singular with numbers; no optional "(s)" |
+| Capitalization detail | /style/capitalization | All-caps/camel only for official names and code; avoid needless caps |
+| Dash grades | /style/dashes | Google avoids en dashes; prefer colons/lists over dash-separated item descriptions |
+| Prepositions | /style/prepositions | Ending sentences with one is fine; include clarifying, omit needless |
+| Footnotes | /style/footnotes | Avoid; cross-references or notes instead |
+| Math notation | /style/mathematical-notation | HTML entities for symbols; italic variables; decimals over fractions |
+| Phone numbers | /style/phone-numbers | Reserved 800-555-01xx example range; "+country code" for international |
+| Trademarks | /style/trademarks | Owner's guidelines; modifier only with a noun; never verb/possessive |
+| HTML semantics | /style/semantic-tagging | Elements for meaning, not appearance; em/strong for emphasis |
+| Anchor targets | /style/headings-targets | Stable lowercase-hyphenated IDs; preserve old anchors on rename |
+| Illustration craft | /tech-writing/two/illustrations | Caption first (states the takeaway); one paragraph of info per diagram; big picture before subsystems |
+
 ## Status
 
-v1. The review/fix loop is tested once on a real project and works well in practice (caught real issues: non-inclusive terms, time-anchored language, passive voice, heading problems, missing alt-text-equivalent for diagrams, etc.). `devdoc-draft` is built (facts-from-repo, outline-first, self-check design) but not yet validated on a real project. Error-message rules were added as a routed, gated reference (from the "Writing Helpful Error Messages" course) but are likewise untested. Rules are English-only by design — skip non-English documents rather than force-fitting them. The Codex/Trae adapters are still unverified against a live install.
+v2. The review/fix loop is tested once on a real project and works well in practice (caught real issues: non-inclusive terms, time-anchored language, passive voice, heading problems, missing alt-text-equivalent for diagrams, etc.). Error-message rules are validated with simulated fresh-session tests (routing 4/4, gating and report shape verified). The v2 rule expansion (procedures, paragraphs, tables, notices, terminology/definitions, grammar essentials, claims; API/sample-code/filename/example rules; ~100-entry grouped word list) passed the same simulated regression tests but is not yet validated on a live project. `devdoc-draft` is built but not yet exercised on a real project. Rules are English-only by design — skip non-English documents rather than force-fitting them. The Codex/Trae adapters are still unverified against a live install.
