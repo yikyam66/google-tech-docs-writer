@@ -1,10 +1,10 @@
 # dev-docs-style
 
-A portable style-guide skill based on the [Google Developer Documentation Style Guide](https://developers.google.com/style). It reviews (and optionally fixes) technical documentation for voice, grammar, punctuation, accessibility, inclusive language, and formatting.
+A portable skill based on Google's public technical-writing resources — primarily the [Google Developer Documentation Style Guide](https://developers.google.com/style), plus targeted material from Google's [Technical Writing courses](https://developers.google.com/tech-writing) (e.g. writing helpful error messages, illustration craft) where it directly serves the same goal: reviewing, fixing, and drafting developer-facing technical documentation for voice, grammar, punctuation, accessibility, inclusive language, and formatting.
 
 ## Why this exists
 
-The full Google style guide runs to roughly 70 pages. Most of it rarely applies to any single document. This project encodes a curated, high-impact subset as a reusable skill. Niche rules (math notation, footnotes, phone numbers, trademarks, detailed HTML semantics, etc.) are deliberately left out of v1 — they can be added later if they turn out to matter in practice.
+The full Google style guide runs to roughly 70 pages, and the Technical Writing courses add more on top of that. Most of it rarely applies to any single document. This project encodes a curated, high-impact subset as a reusable skill, drawing from whichever Google resource covers a given concern best — the style guide for prose conventions, the Technical Writing courses for subject areas like error-message writing. Niche rules (math notation, footnotes, phone numbers, trademarks, detailed HTML semantics, etc.) are deliberately left out of v1 — they can be added later if they turn out to matter in practice. See the "Deferred" table below for what's been considered and left out, with its source for each.
 
 ## Structure
 
