@@ -24,6 +24,10 @@ dev-docs-style/
 ├── devdoc-fix/
 │   ├── SKILL.md                 # same checks, but proposes a diff/preview, applies only after confirmation
 │   └── references/              # synced copy — generated, don't hand-edit
+├── devdoc-draft/
+│   ├── SKILL.md                 # generates a new document from scratch: facts from user + repo, outline first,
+│   │                           # drafts applying the rules natively, self-checks, writes after path confirmation
+│   └── references/              # synced copy — generated, don't hand-edit
 └── adapters/
     ├── codex-notes.md           # how to reuse this in Codex CLI (near drop-in)
     └── trae-notes.md            # how to port this to Trae IDE (manual inlining required)
@@ -48,8 +52,8 @@ v1 had one shared `references/` folder one level above the skill folders, with e
 
 - **`/devdoc-review`** — non-destructive. Reads a document, checks it against the style rules, and reports findings as a structured Markdown checklist (location, rule violated, suggested fix). Does not edit anything.
 - **`/devdoc-fix`** — runs the same checks, then proposes a diff. Applies changes only after the user confirms.
-- **`/devdoc-draft`** — not built yet. Planned mode for generating a new document in this style from scratch (rather than reviewing an existing one).
+- **`/devdoc-draft`** — generates a new document in this style from scratch, for a user's target project. Gathers facts from the user's description and the target repo (anything unverifiable becomes an explicit `TODO:` placeholder — it never invents facts), proposes an outline for confirmation, drafts while applying the rules natively, self-checks the result against the same rules, and writes the file only after the user confirms the target path.
 
 ## Status
 
-v1, tested once on a real project. Core rule set and the review/fix loop work well in practice (caught real issues: non-inclusive terms, time-anchored language, passive voice, heading problems, missing alt-text-equivalent for diagrams, etc.). Rules are English-only by design — skip non-English documents rather than force-fitting them. `devdoc-draft` (generate mode) and the Codex/Trae adapters are still unverified against a live install.
+v1. The review/fix loop is tested once on a real project and works well in practice (caught real issues: non-inclusive terms, time-anchored language, passive voice, heading problems, missing alt-text-equivalent for diagrams, etc.). `devdoc-draft` is built (facts-from-repo, outline-first, self-check design) but not yet validated on a real project. Rules are English-only by design — skip non-English documents rather than force-fitting them. The Codex/Trae adapters are still unverified against a live install.

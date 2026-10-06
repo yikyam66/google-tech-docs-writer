@@ -13,7 +13,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-SKILLS=(devdoc-review devdoc-fix)
+SKILLS=(devdoc-review devdoc-fix devdoc-draft)
 
 for skill in "${SKILLS[@]}"; do
   mkdir -p "$skill/references"
