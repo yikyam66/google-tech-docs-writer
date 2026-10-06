@@ -1,4 +1,4 @@
-# Core rules (v1)
+# Core rules (v2)
 
 Condensed from the Google Developer Documentation Style Guide (developers.google.com/style). Each rule gives the actionable check plus a do/don't example where the source guide provides one. Cite the specific rule name when reporting a violation (e.g. "Active voice", "Inclusive language") so the reader can look it up.
 
@@ -27,6 +27,18 @@ Condensed from the Google Developer Documentation Style Guide (developers.google
 - Use present tense for anything that describes general, timeless behavior: "The server sends an acknowledgment" not "will send".
 - Future tense is fine only for things that genuinely happen later in a sequence: "The file will be archived the next time the backup process runs."
 - Don't describe hypothetical behavior with "would" — say what happens, not what would happen.
+
+## Terminology and definitions
+
+- Use exactly one term per concept throughout — never rename a thing mid-document. Define any unfamiliar term at first use: a brief in-sentence definition, a link, or a glossary entry.
+- Acronyms: on first use spell out the term with the acronym in parentheses; afterwards use only the acronym. Don't spell out well-known ones (API, PDF), and don't define acronyms that appear only once or twice — an acronym readers must mentally expand is an abstraction layer, not a shortcut.
+
+## Grammar essentials
+
+- Include articles: "Create a VM instance", not "Create VM instance" — even in headings and list items.
+- Restrictive clauses take "that" (no comma); nonrestrictive clauses take "which" (with a comma): "The file that stores the config" vs "The config file, which is in JSON format,".
+- Never join two independent sentences with only a comma (comma splice) — use a period or a semicolon.
+- Don't anthropomorphize software: it "detects" but doesn't see, "specifies" but doesn't tell; nothing "wants" or "is happy". Use precise verbs.
 
 ## Inclusive language
 
@@ -59,6 +71,29 @@ Condensed from the Google Developer Documentation Style Guide (developers.google
 - Capitalize the first word of each item (unless case is semantically significant, e.g. code). Add end punctuation only to items that are full sentences / contain a verb.
 - Don't end a list with "etc." or "and so on"; don't write a list with only one item.
 
+## Procedures
+
+- Put the condition or goal before the instruction: "To delete the entire document, click Delete." Readers who don't need the step can skip past it.
+- One action per step; if a step contains "and then", split it.
+- Prefix optional steps with "Optional:".
+
+## Tables
+
+- Label every column with a meaningful header; keep columns parallel — one type of data per column.
+- Don't overload cells; more than a couple of sentences per cell means another format (list or paragraph).
+- Introduce every table with a complete sentence ending in a colon.
+
+## Paragraphs
+
+- One topic per paragraph; the opening sentence establishes the central point.
+- Restrict paragraphs to 3-5 sentences; split anything approaching 7 — readers skip walls of text.
+- Don't write runs of one-sentence paragraphs — combine them or convert to a list.
+
+## Notices (Note/Caution/Warning)
+
+- Use notices sparingly — readers skip them. Never put essential information only in a notice.
+- Note = supplementary information; Caution = risk of a mistake; Warning = risk of data loss or harm.
+
 ## Punctuation essentials
 
 - **Oxford comma**: always use it in a series of three or more ("zones, regions, and multi-regions").
@@ -76,3 +111,9 @@ Condensed from the Google Developer Documentation Style Guide (developers.google
 - Put a non-breaking space between a number and its unit ("64 GB"), except for currency, percentages, and angles.
 - Number ranges use a hyphen ("2012-2016"); unit ranges repeat the unit and use "to", not a hyphen ("-40°C to 85°C").
 - Distinguish decimal units (kB, MB, GB — base 1000) from binary units (KiB, MiB, GiB — base 1024); never mix the two systems for the same quantity.
+
+## Claims and content
+
+- No unverifiable claims — no performance, cost, or security superlatives ("blazingly fast", "military-grade security"). Numbers need a cited source.
+- Don't document or hint at unannounced features, even subtly.
+- Don't copy third-party material; paraphrase and link instead.

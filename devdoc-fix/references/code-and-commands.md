@@ -1,4 +1,4 @@
-# Code and commands (v1)
+# Code and commands (v2)
 
 The part of the guide specific to developer-facing docs: code in prose, placeholders, and command-line syntax.
 
@@ -19,6 +19,7 @@ The part of the guide specific to developer-facing docs: code in prose, placehol
 - Square brackets `[ ]` mark optional arguments; no brackets for required ones.
 - A pipe `|` inside brackets separates mutually exclusive choices: `[--format=json|yaml]`.
 - Ellipsis `...` after an argument means it can repeat: `FILE...`.
+- Curly braces `{ }` with pipes mark required, mutually exclusive choices — the reader must pick one: `--format={json|yaml}`. Square brackets `[ ]` remain optional.
 - Show the command exactly as a reader would type it — don't include a `$` shell prompt prefix inside the code block unless showing output alongside it, and don't include the output in the same block as the command unless clearly separated.
 
 ## UI elements and interaction
@@ -27,3 +28,23 @@ The part of the guide specific to developer-facing docs: code in prose, placehol
 - Chained menu selections use `>`: "Click **File > New > Document**."
 - Don't describe keyboard shortcuts as the primary method unless the UI has no visible equivalent.
 - Don't use directional language ("the button on the right", "above") — UI layout varies by viewport and changes over time.
+
+## API reference style
+
+- Describe what a method does with a third-person -s verb: "Creates a task.", not imperative "Create a task."
+- Document parameters, return values, and exceptions; for anything deprecated, always state the replacement.
+
+## Code samples
+
+- Use language-appropriate indentation (usually 2 spaces) and wrap around 80 characters.
+- Mark omitted code with a comment ("# ..."), never a bare ellipsis in runnable code.
+- Introduce every sample with a sentence ending in a colon.
+
+## Filenames and file types
+
+- Format filenames in code font; write them lowercase, hyphenated, ASCII.
+- Say "a PNG file", never ".png file"; never use a file type as a verb.
+
+## Example names and domains
+
+- Use reserved or obviously fictional values in examples: example.com/net/org, reserved documentation IP ranges, fictional names. Never real personal data.
