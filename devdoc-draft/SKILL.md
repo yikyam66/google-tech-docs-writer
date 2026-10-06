@@ -10,12 +10,12 @@ Write a new technical document from scratch, applying the curated Google Develop
 ## Steps
 
 1. Identify what to draft from the user's request: document type (README, API reference, architecture doc, how-to, ...), audience, and the points it must cover. If the request is vague ("write docs for this"), ask what the document is for and who reads it before drafting.
-2. Read the reference rules before writing anything — they live in this skill's own `references/` folder, right next to this file:
+2. Language gate first: confirm what language the requested document should be in (from the request; ask if unclear). These rules are written for English technical prose — if the requested document is in another language, say so and decline right away, before reading any rule files, rather than force-fitting English rules onto it.
+3. Read the reference rules before writing anything — they live in this skill's own `references/` folder, right next to this file:
    - `references/core-rules.md` — voice/tone, active voice, person, tense, inclusive language, accessibility, headings, lists, punctuation, numbers/units.
    - `references/word-list.md` — preferred terminology to use from the first word, not to patch in later.
    - `references/code-and-commands.md` — if the document will contain code blocks, commands, placeholders, or UI instructions.
    - `references/error-messages.md` — if the document will contain error messages, error-code tables, or UI strings (apply the rules while composing them, not just formatting them).
-3. These rules are written for English technical prose. If the requested document is in another language, say so and decline rather than force-fitting English rules onto it.
 4. Redirect guard: if the user actually wants an *existing* document reviewed or fixed, don't draft a replacement — point them to `/devdoc-review` or `/devdoc-fix` instead.
 5. Gather facts before writing:
    - Use everything the user provided: what the project is, who it's for, what must be documented.
