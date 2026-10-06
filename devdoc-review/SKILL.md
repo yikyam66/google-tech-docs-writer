@@ -1,6 +1,6 @@
 ---
 name: devdoc-review
-description: Review a document against the Google Developer Documentation Style Guide (voice, active voice, inclusive language, accessibility, headings, lists, punctuation, numbers, code formatting). Use when the user asks to check, review, critique, or proofread a draft for writing style or clarity — including error-message strings, error-code tables, and UI strings, standalone or inside a document — or invokes /devdoc-review. Read-only — produces a report, never edits the file. English-language rules only; skip documents in other languages.
+description: Review a document against the Google Developer Documentation Style Guide (voice, active voice, inclusive language, accessibility, headings, lists, punctuation, numbers, code formatting). Use when the user asks to check, review, critique, or proofread a draft for writing style or clarity — including error-message strings, error-code tables, and UI strings, standalone or inside a document — or invokes /devdoc-review. Not for checking factual accuracy, code correctness, or content completeness — style and formatting only. Read-only — produces a report, never edits the file. English-language rules only; skip documents in other languages.
 ---
 
 # devdoc-review

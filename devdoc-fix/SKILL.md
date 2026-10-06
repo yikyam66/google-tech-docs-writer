@@ -1,6 +1,6 @@
 ---
 name: devdoc-fix
-description: Fix a document's style issues against the Google Developer Documentation Style Guide (voice, active voice, inclusive language, accessibility, headings, lists, punctuation, numbers, code formatting). Use when the user asks to fix, correct, or clean up a draft per style guidelines — including error-message strings, error-code tables, and UI strings, standalone or inside a document — or invokes /devdoc-fix. Proposes changes as a diff/preview and applies them only after the user confirms. English-language rules only; skip documents in other languages.
+description: Fix a document's style issues against the Google Developer Documentation Style Guide (voice, active voice, inclusive language, accessibility, headings, lists, punctuation, numbers, code formatting). Use when the user asks to fix, correct, or clean up a draft per style guidelines — including error-message strings, error-code tables, and UI strings, standalone or inside a document — or invokes /devdoc-fix. Not for fixing broken links, factual errors, or code bugs — style and formatting only. Proposes changes as a diff/preview and applies them only after the user confirms. English-language rules only; skip documents in other languages.
 ---
 
 # devdoc-fix
