@@ -4,7 +4,7 @@ Trae doesn't have a packaged skill system — its equivalent is `.trae/rules/` (
 
 ## Options
 
-1. **Manual inline (v1 — do this first)**: concatenate `references/core-rules.md` + `word-list.md` + `code-and-commands.md` plus a short "how to use this" preamble (adapted from `style-review/SKILL.md` and `style-fix/SKILL.md`) into one file, saved as `.trae/rules/dev-docs-style.md` (project) or `~/.trae/user_rules.md` (global). Update by hand whenever `references/` changes — acceptable at this project's current size.
+1. **Manual inline (v1 — do this first)**: concatenate `references/core-rules.md` + `word-list.md` + `code-and-commands.md` plus a short "how to use this" preamble (adapted from `devdoc-review/SKILL.md` and `devdoc-fix/SKILL.md`) into one file, saved as `.trae/rules/dev-docs-style.md` (project) or `~/.trae/user_rules.md` (global). Update by hand whenever the canonical `references/` changes — acceptable at this project's current size.
 2. **Small build script (later, if `references/` starts changing often)**: a short script that concatenates the `references/*.md` files plus a fixed preamble into `.trae/rules/dev-docs-style.md`, run manually after edits. Not built yet — not worth the overhead until rule changes become frequent enough that manual re-sync gets error-prone.
 
 ## Caveats

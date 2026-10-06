@@ -11,21 +11,29 @@ The full Google style guide runs to roughly 70 pages. Most of it rarely applies 
 ```
 dev-docs-style/
 ├── README.md
-├── references/              # single source of truth — tool-agnostic plain Markdown
-│   ├── core-rules.md        # voice/tone, active voice, person, tense, inclusive language,
-│   │                        # accessibility basics, headings, lists, core punctuation, numbers & units
-│   ├── word-list.md         # curated high-frequency terminology (preferred vs. avoided terms)
-│   └── code-and-commands.md # code-in-text, placeholders, command-line syntax
-├── style-review/
-│   └── SKILL.md             # read-only: reports violations as a structured Markdown checklist
-├── style-fix/
-│   └── SKILL.md             # same checks, but proposes a diff/preview, applies only after confirmation
+├── references/                 # canonical/master copy — edit rules here
+│   ├── core-rules.md           # voice/tone, active voice, person, tense, inclusive language,
+│   │                           # accessibility basics, headings, lists, core punctuation, numbers & units
+│   ├── word-list.md            # curated high-frequency terminology (preferred vs. avoided terms)
+│   └── code-and-commands.md    # code-in-text, placeholders, command-line syntax
+├── scripts/
+│   └── sync-references.sh      # copies references/*.md into each skill's own references/ copy
+├── devdoc-review/
+│   ├── SKILL.md                 # read-only: reports violations as a structured Markdown checklist
+│   └── references/              # synced copy — generated, don't hand-edit (run sync-references.sh)
+├── devdoc-fix/
+│   ├── SKILL.md                 # same checks, but proposes a diff/preview, applies only after confirmation
+│   └── references/              # synced copy — generated, don't hand-edit
 └── adapters/
-    ├── codex-notes.md        # how to reuse this in Codex CLI (near drop-in)
-    └── trae-notes.md         # how to port this to Trae IDE (manual inlining required)
+    ├── codex-notes.md           # how to reuse this in Codex CLI (near drop-in)
+    └── trae-notes.md            # how to port this to Trae IDE (manual inlining required)
 ```
 
-Every tool adapter (`style-review/SKILL.md`, `style-fix/SKILL.md`, and anything under `adapters/`) is a thin pointer into `references/`. The actual rules live in exactly one place, so updating a rule never means updating it three times.
+Each skill folder (`devdoc-review/`, `devdoc-fix/`) is **fully self-contained** — its own `SKILL.md` plus its own `references/` copy, no path ever reaches outside the folder. `references/` at the project root is the canonical copy for editing; after changing a rule there, run `scripts/sync-references.sh` to push it into every skill folder.
+
+### Lessons learned (why it's duplicated, not shared)
+
+v1 had one shared `references/` folder one level above the skill folders, with each `SKILL.md` pointing at it via `../references/...`. Real-world testing (another agent session, installed via the usual `~/.claude/skills/devdoc-review` symlink) showed this breaks: some hosts resolve a relative `../` path against the *symlink's apparent location* rather than the symlink's real target, so `../references/` pointed at a directory that doesn't exist and the read failed. The fix is structural, not a workaround: every skill folder now carries its own copy of the rules and never uses `..` to reach outside itself. The small duplication cost is paid once per rule change via `scripts/sync-references.sh`.
 
 ## Cross-tool support
 
@@ -34,13 +42,14 @@ Every tool adapter (`style-review/SKILL.md`, `style-fix/SKILL.md`, and anything 
 | Claude Code | `SKILL.md` + `references/*.md`, loaded on demand | native — built here |
 | Codex CLI | Agent Skills: `.agents/skills/<name>/SKILL.md` + `references/`, same format as Claude Code | drop-in — see `adapters/codex-notes.md` |
 | Trae IDE | `.trae/rules/` — a single self-contained Markdown file, no confirmed import mechanism | needs manual inlining or a small build step — see `adapters/trae-notes.md` |
-| Any other tool | — | add a new note under `adapters/`; never duplicate `references/` content |
+| Any other tool | — | add a new note under `adapters/`; never duplicate rule content by hand, edit `references/` and re-run the sync script |
 
 ## Modes
 
-- **`/style-review`** — non-destructive. Reads a document, checks it against `references/`, and reports findings as a structured Markdown checklist (location, rule violated, suggested fix). Does not edit anything.
-- **`/style-fix`** — runs the same checks, then proposes a diff. Applies changes only after the user confirms.
+- **`/devdoc-review`** — non-destructive. Reads a document, checks it against the style rules, and reports findings as a structured Markdown checklist (location, rule violated, suggested fix). Does not edit anything.
+- **`/devdoc-fix`** — runs the same checks, then proposes a diff. Applies changes only after the user confirms.
+- **`/devdoc-draft`** — not built yet. Planned mode for generating a new document in this style from scratch (rather than reviewing an existing one).
 
 ## Status
 
-v1 draft — curated core rules only, Claude Code is the primary target. Scope, wording, and the Trae/Codex adapters will be refined as this gets used.
+v1, tested once on a real project. Core rule set and the review/fix loop work well in practice (caught real issues: non-inclusive terms, time-anchored language, passive voice, heading problems, missing alt-text-equivalent for diagrams, etc.). Rules are English-only by design — skip non-English documents rather than force-fitting them. `devdoc-draft` (generate mode) and the Codex/Trae adapters are still unverified against a live install.
