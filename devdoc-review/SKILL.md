@@ -1,6 +1,6 @@
 ---
 name: devdoc-review
-description: Review a document against the Google Developer Documentation Style Guide (voice, active voice, inclusive language, accessibility, headings, lists, punctuation, numbers, code formatting). Use when the user asks to check, review, critique, or proofread a draft for writing style or clarity, or invokes /devdoc-review. Read-only — produces a report, never edits the file. English-language rules only; skip documents in other languages.
+description: Review a document against the Google Developer Documentation Style Guide (voice, active voice, inclusive language, accessibility, headings, lists, punctuation, numbers, code formatting). Use when the user asks to check, review, critique, or proofread a draft for writing style or clarity — including error-message strings, error-code tables, and UI strings, standalone or inside a document — or invokes /devdoc-review. Read-only — produces a report, never edits the file. English-language rules only; skip documents in other languages.
 ---
 
 # devdoc-review
@@ -14,6 +14,7 @@ Check a document against the curated Google Developer Documentation Style Guide 
    - `references/core-rules.md` — voice/tone, active voice, person, tense, inclusive language, accessibility, headings, lists, punctuation, numbers/units.
    - `references/word-list.md` — specific terms to flag.
    - `references/code-and-commands.md` — only if the document contains code blocks, commands, placeholders, or UI instructions.
+   - `references/error-messages.md` — only if the document contains error-message text, error-code tables, or UI strings.
 3. These rules are written for English technical prose. If the target document is in another language, say so and skip the review rather than force-fitting English rules onto it.
 4. Read the target document in full before reporting anything — don't flag from a partial read.
 5. Check the document against each category in `core-rules.md` and against the `word-list.md` table. Only report a rule as violated where it actually applies — don't force-fit a rule that doesn't apply to this document's content or audience.

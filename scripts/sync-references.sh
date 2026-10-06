@@ -17,6 +17,6 @@ SKILLS=(devdoc-review devdoc-fix devdoc-draft)
 
 for skill in "${SKILLS[@]}"; do
   mkdir -p "$skill/references"
-  cp references/core-rules.md references/word-list.md references/code-and-commands.md "$skill/references/"
+  cp references/core-rules.md references/word-list.md references/code-and-commands.md references/error-messages.md "$skill/references/"
   echo "synced references/ -> $skill/references/"
 done

@@ -1,6 +1,6 @@
 ---
 name: devdoc-fix
-description: Fix a document's style issues against the Google Developer Documentation Style Guide (voice, active voice, inclusive language, accessibility, headings, lists, punctuation, numbers, code formatting). Use when the user asks to fix, correct, or clean up a draft per style guidelines, or invokes /devdoc-fix. Proposes changes as a diff/preview and applies them only after the user confirms. English-language rules only; skip documents in other languages.
+description: Fix a document's style issues against the Google Developer Documentation Style Guide (voice, active voice, inclusive language, accessibility, headings, lists, punctuation, numbers, code formatting). Use when the user asks to fix, correct, or clean up a draft per style guidelines — including error-message strings, error-code tables, and UI strings, standalone or inside a document — or invokes /devdoc-fix. Proposes changes as a diff/preview and applies them only after the user confirms. English-language rules only; skip documents in other languages.
 ---
 
 # devdoc-fix
@@ -14,6 +14,7 @@ Check a document against the curated Google Developer Documentation Style Guide 
    - `references/core-rules.md` — voice/tone, active voice, person, tense, inclusive language, accessibility, headings, lists, punctuation, numbers/units.
    - `references/word-list.md` — specific terms to flag.
    - `references/code-and-commands.md` — only if the document contains code blocks, commands, placeholders, or UI instructions.
+   - `references/error-messages.md` — only if the document contains error-message text, error-code tables, or UI strings.
 3. These rules are written for English technical prose. If the target document is in another language, say so and skip it rather than force-fitting English rules onto it.
 4. Read the target document in full before reporting anything — don't flag from a partial read.
 5. Build a findings list: for each violation, capture the location (quote the exact phrase, or a line number), which rule it violates, and a concrete suggested fix. Only flag a rule where it actually applies — don't force-fit one that doesn't fit this document's content or audience.

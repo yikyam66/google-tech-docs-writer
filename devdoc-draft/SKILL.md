@@ -14,6 +14,7 @@ Write a new technical document from scratch, applying the curated Google Develop
    - `references/core-rules.md` — voice/tone, active voice, person, tense, inclusive language, accessibility, headings, lists, punctuation, numbers/units.
    - `references/word-list.md` — preferred terminology to use from the first word, not to patch in later.
    - `references/code-and-commands.md` — if the document will contain code blocks, commands, placeholders, or UI instructions.
+   - `references/error-messages.md` — if the document will contain error messages, error-code tables, or UI strings (apply the rules while composing them, not just formatting them).
 3. These rules are written for English technical prose. If the requested document is in another language, say so and decline rather than force-fitting English rules onto it.
 4. Redirect guard: if the user actually wants an *existing* document reviewed or fixed, don't draft a replacement — point them to `/devdoc-review` or `/devdoc-fix` instead.
 5. Gather facts before writing:

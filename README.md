@@ -15,7 +15,9 @@ dev-docs-style/
 │   ├── core-rules.md           # voice/tone, active voice, person, tense, inclusive language,
 │   │                           # accessibility basics, headings, lists, core punctuation, numbers & units
 │   ├── word-list.md            # curated high-frequency terminology (preferred vs. avoided terms)
-│   └── code-and-commands.md    # code-in-text, placeholders, command-line syntax
+│   ├── code-and-commands.md    # code-in-text, placeholders, command-line syntax
+│   └── error-messages.md       # writing helpful error messages (course-curated; read only when a
+│                               # document contains error-message text, error-code tables, or UI strings)
 ├── scripts/
 │   └── sync-references.sh      # copies references/*.md into each skill's own references/ copy
 ├── devdoc-review/
@@ -39,6 +41,10 @@ Each skill folder (`devdoc-review/`, `devdoc-fix/`) is **fully self-contained** 
 
 v1 had one shared `references/` folder one level above the skill folders, with each `SKILL.md` pointing at it via `../references/...`. Real-world testing (another agent session, installed via the usual `~/.claude/skills/devdoc-review` symlink) showed this breaks: some hosts resolve a relative `../` path against the *symlink's apparent location* rather than the symlink's real target, so `../references/` pointed at a directory that doesn't exist and the read failed. The fix is structural, not a workaround: every skill folder now carries its own copy of the rules and never uses `..` to reach outside itself. The small duplication cost is paid once per rule change via `scripts/sync-references.sh`.
 
+### Lessons learned (routing before skills)
+
+Skill names follow `devdoc-<verb>`: a skill is a *verb the user performs* (review, fix, draft). Error-message writing is a *noun* — a subject area — so it enters as routing (trigger words in each SKILL.md description) plus one gated reference file (`error-messages.md`), not as a fourth skill `devdoc-errors`. Rule of thumb for any future content: classify first (user-facing verb → skill candidate; rule set → reference file; low-frequency/edge → the deferred list), then name. Each change lands as its own commit so it can be reverted independently.
+
 ## Cross-tool support
 
 | Tool | Mechanism | Status |
@@ -56,4 +62,4 @@ v1 had one shared `references/` folder one level above the skill folders, with e
 
 ## Status
 
-v1. The review/fix loop is tested once on a real project and works well in practice (caught real issues: non-inclusive terms, time-anchored language, passive voice, heading problems, missing alt-text-equivalent for diagrams, etc.). `devdoc-draft` is built (facts-from-repo, outline-first, self-check design) but not yet validated on a real project. Rules are English-only by design — skip non-English documents rather than force-fitting them. The Codex/Trae adapters are still unverified against a live install.
+v1. The review/fix loop is tested once on a real project and works well in practice (caught real issues: non-inclusive terms, time-anchored language, passive voice, heading problems, missing alt-text-equivalent for diagrams, etc.). `devdoc-draft` is built (facts-from-repo, outline-first, self-check design) but not yet validated on a real project. Error-message rules were added as a routed, gated reference (from the "Writing Helpful Error Messages" course) but are likewise untested. Rules are English-only by design — skip non-English documents rather than force-fitting them. The Codex/Trae adapters are still unverified against a live install.
