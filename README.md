@@ -20,22 +20,41 @@ dev-docs-style/
 │                               # document contains error-message text, error-code tables, or UI strings)
 ├── scripts/
 │   └── sync-references.sh      # copies references/*.md into each skill's own references/ copy
-├── devdoc-review/
-│   ├── SKILL.md                 # read-only: reports violations as a structured Markdown checklist
-│   └── references/              # synced copy—generated, don't hand-edit (run sync-references.sh)
-├── devdoc-fix/
-│   ├── SKILL.md                 # same checks, but proposes a diff/preview, applies only after confirmation
-│   └── references/              # synced copy—generated, don't hand-edit
-├── devdoc-draft/
-│   ├── SKILL.md                 # generates a new document from scratch: facts from user + repo, outline first,
-│   │                           # drafts applying the rules natively, self-checks, writes after path confirmation
-│   └── references/              # synced copy—generated, don't hand-edit
+├── skills/                     # flat layout so `npx skills add` can auto-discover all three at once
+│   ├── devdoc-review/
+│   │   ├── SKILL.md             # read-only: reports violations as a structured Markdown checklist
+│   │   └── references/          # synced copy—generated, don't hand-edit (run sync-references.sh)
+│   ├── devdoc-fix/
+│   │   ├── SKILL.md             # same checks, but proposes a diff/preview, applies only after confirmation
+│   │   └── references/          # synced copy—generated, don't hand-edit
+│   └── devdoc-draft/
+│       ├── SKILL.md             # generates a new document from scratch: facts from user + repo, outline first,
+│       │                       # drafts applying the rules natively, self-checks, writes after path confirmation
+│       └── references/          # synced copy—generated, don't hand-edit
 └── adapters/
     ├── codex-notes.md           # how to reuse this in Codex CLI (near drop-in)
     └── trae-notes.md            # how to port this to Trae IDE (manual inlining required)
 ```
 
-Each skill folder (`devdoc-review/`, `devdoc-fix/`, `devdoc-draft/`) is **fully self-contained**—its own `SKILL.md` plus its own `references/` copy, no path ever reaches outside the folder. `references/` at the project root is the canonical copy for editing; after changing a rule there, run `scripts/sync-references.sh` to push it into every skill folder.
+Each skill folder (`skills/devdoc-review/`, `skills/devdoc-fix/`, `skills/devdoc-draft/`) is **fully self-contained**—its own `SKILL.md` plus its own `references/` copy, no path ever reaches outside the folder. `references/` at the project root is the canonical copy for editing; after changing a rule there, run `scripts/sync-references.sh` to push it into every skill folder.
+
+## Installing
+
+**Via [`npx skills`](https://skills.sh) (any supported agent — Claude Code, Codex, Cursor, Trae, and more):**
+
+```bash
+npx skills add yikyam66/google-tech-docs-writer
+```
+
+The `skills/` flat layout above means this one command discovers and installs all three (`devdoc-review`, `devdoc-fix`, `devdoc-draft`) — no per-skill path needed. To install just one: `npx skills add https://github.com/yikyam66/google-tech-docs-writer/tree/main/skills/devdoc-review`.
+
+**Manual symlink (Claude Code or ZCode), without `npx skills`:**
+
+```bash
+ln -s "$(pwd)/skills/devdoc-review" ~/.claude/skills/devdoc-review   # Claude Code
+ln -s "$(pwd)/skills/devdoc-review" ~/.agents/skills/devdoc-review   # ZCode
+# repeat for devdoc-fix and devdoc-draft
+```
 
 ### Lessons learned (why it's duplicated, not shared)
 
@@ -50,14 +69,12 @@ Skill names follow `devdoc-<verb>`: a skill is a *verb the user performs* (revie
 | Tool | Mechanism | Status |
 |---|---|---|
 | Claude Code | `SKILL.md` + `references/*.md`, loaded on demand; symlink into `~/.claude/skills/<name>/` | native—built here |
-| ZCode | Same skill format; discovered from `<project>/.zcode/skills/`, `<project>/.agents/skills/`, `~/.zcode/skills/`, or `~/.agents/skills/` (it does not scan `~/.claude/skills/`) | native—symlink into `~/.agents/skills/<name>/`, see root README |
+| ZCode | Same skill format; discovered from `<project>/.zcode/skills/`, `<project>/.agents/skills/`, `~/.zcode/skills/`, or `~/.agents/skills/` (it does not scan `~/.claude/skills/`) | native—symlink into `~/.agents/skills/<name>/`, see Installing above |
 | Codex CLI | Agent Skills: `.agents/skills/<name>/SKILL.md` + `references/`, same format as Claude Code | drop-in—see `adapters/codex-notes.md` |
 | Trae IDE | `.trae/rules/`—a single self-contained Markdown file, no confirmed import mechanism | needs manual inlining or a small build step—see `adapters/trae-notes.md` |
 | Any other tool | — | add a new note under `adapters/`; never duplicate rule content by hand, edit `references/` and re-run the sync script |
 
 ## Modes
-
-For a user-facing walkthrough of all three modes, see [getting-started.md](../getting-started.md).
 
 - **`/devdoc-review`**—non-destructive. Reads a document, checks it against the style rules, and reports findings as a structured Markdown checklist (location, rule violated, suggested fix). Does not edit anything.
 - **`/devdoc-fix`**—runs the same checks, then proposes a diff. Applies changes only after the user confirms.
@@ -88,6 +105,6 @@ Rule areas that exist in the source material but aren't in the references. Promo
 
 ## Status
 
-v2. The review/fix loop is tested once on a real project and works well in practice; it caught real issues: non-inclusive terms, time-anchored language, passive voice, heading problems, and missing alt-text-equivalent for diagrams. Error-message rules are validated with simulated fresh-session tests (routing 4/4, gating and report shape verified). A formal eval suite lives in `dev-docs-style-workspace/`, with iteration-1 results in `dev-docs-style-workspace/iteration-1/benchmark.md`. Iteration 1 scored a 96% with-skill pass rate versus 34% without across four evals on `claude-sonnet-5`. Its findings drove the description tightening and two assertion revisions. The description-trigger evaluation is reasoned but not yet measured against a live CLI.
+v2. The review/fix loop is tested once on a real project and works well in practice; it caught real issues: non-inclusive terms, time-anchored language, passive voice, heading problems, and missing alt-text-equivalent for diagrams. Error-message rules are validated with simulated fresh-session tests (routing 4/4, gating and report shape verified). A formal eval suite (fixtures, assertions, and iteration-1 results) exists in the project's private development repo and scored a 96% with-skill pass rate versus 34% without across four evals on `claude-sonnet-5`. Its findings drove the description tightening and two assertion revisions. The description-trigger evaluation is reasoned but not yet measured against a live CLI.
 
 The v2 rule expansion (procedures, paragraphs, tables, notices, terminology/definitions, grammar essentials, claims; API/sample-code/filename/example rules; ~100-entry grouped word list) passed the same simulated regression tests. A style review of this README gave it its first live-project exercise. `devdoc-draft` was exercised once on a real project: it drafted this repository's getting-started guide, language gate included. Rules are English-only by design—skip non-English documents rather than force-fitting them. The Codex/Trae adapters are still unverified against a live install.
