@@ -57,6 +57,8 @@ Skill names follow `devdoc-<verb>`: a skill is a *verb the user performs* (revie
 
 ## Modes
 
+For a user-facing walkthrough of all three modes, see [getting-started.md](../getting-started.md).
+
 - **`/devdoc-review`** — non-destructive. Reads a document, checks it against the style rules, and reports findings as a structured Markdown checklist (location, rule violated, suggested fix). Does not edit anything.
 - **`/devdoc-fix`** — runs the same checks, then proposes a diff. Applies changes only after the user confirms.
 - **`/devdoc-draft`** — generates a new document in this style from scratch, for a user's target project. Gathers facts from the user's description and the target repo (anything unverifiable becomes an explicit `TODO:` placeholder — it never invents facts), proposes an outline for confirmation, drafts while applying the rules natively, self-checks the result against the same rules, and writes the file only after the user confirms the target path.
