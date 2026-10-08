@@ -4,7 +4,7 @@ A portable skill based on Google's public technical-writing resources. The prima
 
 ## Why this exists
 
-The full Google style guide runs to roughly 70 pages, and the Technical Writing courses add more on top of that. Most of it rarely applies to any single document. This project encodes a curated, high-impact subset as a reusable skill, drawing from whichever Google resource covers a given concern best—the style guide for prose conventions, the Technical Writing courses for subject areas like error-message writing. Niche rules—math notation, footnotes, phone numbers, trademarks, and detailed HTML semantics—are deliberately left out of v1. They can be added later if they turn out to matter in practice. See the "Deferred" table below for what's been considered and left out, with its source for each.
+The full Google style guide runs to roughly 70 pages, and the Technical Writing courses add more on top of that. Most of it rarely applies to any single document. This project encodes a curated, high-impact subset as a reusable skill. It draws from whichever Google resource covers a given concern best—the style guide for prose conventions, the Technical Writing courses for subject areas like error-message writing. Niche rules—math notation, footnotes, phone numbers, trademarks, and detailed HTML semantics—are deliberately left out of v1. They can be added later if they turn out to matter in practice. See the "Deferred" table below for what's been considered and left out, with its source for each.
 
 ## Structure
 
@@ -43,9 +43,11 @@ v1 had one shared `references/` folder one level above the skill folders, with e
 
 ### Lessons learned (routing before skills)
 
-Skill names follow `devdoc-<verb>`: a skill is a *verb the user performs* (review, fix, draft). Error-message writing is a *noun*—a subject area—so it enters as routing (trigger words in each SKILL.md description) plus one gated reference file (`error-messages.md`), not as a fourth skill `devdoc-errors`. Rule of thumb for any future content: classify first (user-facing verb → skill candidate; rule set → reference file; low-frequency/edge → the deferred list), then name. Each change lands as its own commit so it can be reverted independently.
+Skill names follow `devdoc-<verb>`: a skill is a *verb the user performs* (review, fix, draft). Error-message writing is a *noun*—a subject area—so it enters as routing (trigger words in each SKILL.md description) plus one gated reference file (`error-messages.md`), not as a fourth skill `devdoc-errors`. Rule of thumb for any future content: classify first—user-facing verb → skill candidate; rule set → reference file; low-frequency/edge → the deferred list—then name. Each change lands as its own commit so it can be reverted independently.
 
 ## Cross-tool support
+
+The project targets the following tools:
 
 | Tool | Mechanism | Status |
 |---|---|---|
@@ -53,19 +55,19 @@ Skill names follow `devdoc-<verb>`: a skill is a *verb the user performs* (revie
 | ZCode | Same skill format; discovered from `<project>/.zcode/skills/`, `<project>/.agents/skills/`, `~/.zcode/skills/`, or `~/.agents/skills/` (it does not scan `~/.claude/skills/`) | native—symlink into `~/.agents/skills/<name>/`, see root README |
 | Codex CLI | Agent Skills: `.agents/skills/<name>/SKILL.md` + `references/`, same format as Claude Code | drop-in—see `adapters/codex-notes.md` |
 | Trae IDE | `.trae/rules/`—a single self-contained Markdown file, no confirmed import mechanism | needs manual inlining or a small build step—see `adapters/trae-notes.md` |
-| Any other tool | — | add a new note under `adapters/`; never duplicate rule content by hand, edit `references/` and re-run the sync script |
+| Any other tool | — | add a new note under `adapters/`; never duplicate rule content by hand—edit `references/` and re-run the sync script |
 
 ## Modes
 
-For a user-facing walkthrough of all three modes, see [getting-started.md](../getting-started.md).
+For a user-facing walkthrough of all three modes, see [getting-started.md](../getting-started.md). The three skills are:
 
-- **`/devdoc-review`**—non-destructive. Reads a document, checks it against the style rules, and reports findings as a structured Markdown checklist (location, rule violated, suggested fix). Does not edit anything.
-- **`/devdoc-fix`**—runs the same checks, then proposes a diff. Applies changes only after the user confirms.
-- **`/devdoc-draft`**—generates a new document in this style from scratch, for a user's target project. Gathers facts from the user's description and the target repo (anything unverifiable becomes an explicit `TODO:` placeholder—it never invents facts), proposes an outline for confirmation, drafts while applying the rules natively, self-checks the result against the same rules, and writes the file only after the user confirms the target path.
+- `/devdoc-review`—non-destructive. Reads a document, checks it against the style rules, and reports findings as a structured Markdown checklist (location, rule violated, suggested fix). Does not edit anything.
+- `/devdoc-fix`—runs the same checks, then proposes a diff. Applies changes only after the user confirms.
+- `/devdoc-draft`—generates a new document in this style from scratch, for a user's target project. Gathers facts from the user's description and the target repo (anything unverifiable becomes an explicit `TODO:` placeholder—it never invents facts), proposes an outline for confirmation, drafts while applying the rules natively, self-checks the result against the same rules, and writes the file only after the user confirms the target path.
 
 ## Deferred (known gaps—deliberately not curated yet)
 
-Rule areas that exist in the source material but aren't in the references. Promotion = copy into the right reference file, one small commit—this list exists so "not included" means "considered and deferred", not "unknown".
+Rule areas that exist in the source material but aren't in the references: promotion means copying into the right reference file, one small commit—this list exists so "not included" means "considered and deferred", not "unknown".
 
 | Area | Source | One-line rule |
 |---|---|---|
