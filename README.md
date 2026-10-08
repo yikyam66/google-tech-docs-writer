@@ -23,7 +23,7 @@ That same review caught a 55-word opening sentence, three substantive parentheti
 
 ## Install
 
-The fastest way to install all three skills is the skills CLI (verified with Claude Code):
+The skill folders live under `skills/` because that is one of the locations the skills CLI auto-discovers, so all three install in one command (verified with Claude Code):
 
 ```
 npx skills add yikyam66/google-tech-docs-writer
@@ -32,17 +32,17 @@ npx skills add yikyam66/google-tech-docs-writer
 To install manually instead, clone this repository, then create one symlink per skill per host. Claude Code discovers a skill only when the `SKILL.md` file sits directly inside `~/.claude/skills/<name>/`, where `<name>` is the skill folder name, for example `devdoc-review`. From this repository's root, run:
 
 ```
-ln -s "$(pwd)/devdoc-review" ~/.claude/skills/devdoc-review
-ln -s "$(pwd)/devdoc-fix" ~/.claude/skills/devdoc-fix
-ln -s "$(pwd)/devdoc-draft" ~/.claude/skills/devdoc-draft
+ln -s "$(pwd)/skills/devdoc-review" ~/.claude/skills/devdoc-review
+ln -s "$(pwd)/skills/devdoc-fix" ~/.claude/skills/devdoc-fix
+ln -s "$(pwd)/skills/devdoc-draft" ~/.claude/skills/devdoc-draft
 ```
 
 ZCode doesn't scan `~/.claude/skills/`, so a Claude Code install is invisible to ZCode—each host needs its own set of symlinks. Create a parallel set in `~/.agents/skills/`:
 
 ```
-ln -s "$(pwd)/devdoc-review" ~/.agents/skills/devdoc-review
-ln -s "$(pwd)/devdoc-fix" ~/.agents/skills/devdoc-fix
-ln -s "$(pwd)/devdoc-draft" ~/.agents/skills/devdoc-draft
+ln -s "$(pwd)/skills/devdoc-review" ~/.agents/skills/devdoc-review
+ln -s "$(pwd)/skills/devdoc-fix" ~/.agents/skills/devdoc-fix
+ln -s "$(pwd)/skills/devdoc-draft" ~/.agents/skills/devdoc-draft
 ```
 
 Start a new session after installing—newly installed skills appear in the available-skills list only in a new session.
@@ -68,7 +68,7 @@ The full Google style guide runs to roughly 70 pages, and most of its rules rare
 
 ## Editing the rules
 
-Edit the canonical copies in `references/`—never the copies inside `devdoc-*/references/`. After changing a rule, run the sync script from this repository's root before you test or commit:
+Edit the canonical copies in `references/`—never the copies inside `skills/devdoc-*/references/`. After changing a rule, run the sync script from this repository's root before you test or commit:
 
 ```
 ./scripts/sync-references.sh

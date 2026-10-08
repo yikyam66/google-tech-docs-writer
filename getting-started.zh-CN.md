@@ -27,17 +27,17 @@ npx skills add yikyam66/google-tech-docs-writer
 Claude Code 只有在 `~/.claude/skills/<name>/` 目录下**直接**包含 `SKILL.md` 文件时才会发现技能，其中 `<name>` 是技能文件夹名，例如 `devdoc-review`。在仓库根目录下为每个技能创建一条符号链接：
 
 ```
-ln -s "$(pwd)/devdoc-review" ~/.claude/skills/devdoc-review
-ln -s "$(pwd)/devdoc-fix" ~/.claude/skills/devdoc-fix
-ln -s "$(pwd)/devdoc-draft" ~/.claude/skills/devdoc-draft
+ln -s "$(pwd)/skills/devdoc-review" ~/.claude/skills/devdoc-review
+ln -s "$(pwd)/skills/devdoc-fix" ~/.claude/skills/devdoc-fix
+ln -s "$(pwd)/skills/devdoc-draft" ~/.claude/skills/devdoc-draft
 ```
 
 ZCode 不会扫描 `~/.claude/skills/`，所以只装给 Claude Code 的话，ZCode 看不见这些技能。这里的命令使用用户级 `~/.agents/skills/` 目录，请创建一组对应的符号链接：
 
 ```
-ln -s "$(pwd)/devdoc-review" ~/.agents/skills/devdoc-review
-ln -s "$(pwd)/devdoc-fix" ~/.agents/skills/devdoc-fix
-ln -s "$(pwd)/devdoc-draft" ~/.agents/skills/devdoc-draft
+ln -s "$(pwd)/skills/devdoc-review" ~/.agents/skills/devdoc-review
+ln -s "$(pwd)/skills/devdoc-fix" ~/.agents/skills/devdoc-fix
+ln -s "$(pwd)/skills/devdoc-draft" ~/.agents/skills/devdoc-draft
 ```
 
 安装完成后请新开一个会话；新安装的技能只有在新会话中才会出现在可用技能列表里。

@@ -27,17 +27,17 @@ To install manually instead, clone this repository. Claude Code and ZCode discov
 Claude Code discovers a skill only when the `SKILL.md` file sits directly inside `~/.claude/skills/<name>/`, where `<name>` is the skill folder name, for example `devdoc-review`. From the repository root, create one symlink per skill:
 
 ```
-ln -s "$(pwd)/devdoc-review" ~/.claude/skills/devdoc-review
-ln -s "$(pwd)/devdoc-fix" ~/.claude/skills/devdoc-fix
-ln -s "$(pwd)/devdoc-draft" ~/.claude/skills/devdoc-draft
+ln -s "$(pwd)/skills/devdoc-review" ~/.claude/skills/devdoc-review
+ln -s "$(pwd)/skills/devdoc-fix" ~/.claude/skills/devdoc-fix
+ln -s "$(pwd)/skills/devdoc-draft" ~/.claude/skills/devdoc-draft
 ```
 
 ZCode doesn't scan `~/.claude/skills/`, so a Claude Code install is invisible to ZCode. The commands here use the user-level `~/.agents/skills/` directory. Create a parallel set of symlinks:
 
 ```
-ln -s "$(pwd)/devdoc-review" ~/.agents/skills/devdoc-review
-ln -s "$(pwd)/devdoc-fix" ~/.agents/skills/devdoc-fix
-ln -s "$(pwd)/devdoc-draft" ~/.agents/skills/devdoc-draft
+ln -s "$(pwd)/skills/devdoc-review" ~/.agents/skills/devdoc-review
+ln -s "$(pwd)/skills/devdoc-fix" ~/.agents/skills/devdoc-fix
+ln -s "$(pwd)/skills/devdoc-draft" ~/.agents/skills/devdoc-draft
 ```
 
 Start a new session after you install the skills. Newly installed skills appear in the available-skills list only in a new session.
