@@ -2,6 +2,8 @@
 
 A portable skill based on Google's public technical-writing resources. The primary source is the [Google Developer Documentation Style Guide](https://developers.google.com/style). Targeted material from Google's [Technical Writing courses](https://developers.google.com/tech-writing) enters where it directly serves the same goal—for example, writing helpful error messages and illustration craft. The skill reviews, fixes, and drafts developer-facing technical documentation for voice, grammar, punctuation, accessibility, inclusive language, and formatting.
 
+Also available in [简体中文](README.zh-CN.md).
+
 ## What it does
 
 Three skills share one rule set, and each skill folder is fully self-contained:
